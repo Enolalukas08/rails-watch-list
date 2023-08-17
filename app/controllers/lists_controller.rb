@@ -9,12 +9,13 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
+    @bookmark = Bookmark.new
   end
 
   def create
     @list = List.new(list_params)
     if @list.save
-      redirect_to @list, notice: "list was successfully created.", status: :see_other
+      redirect_to list_path(@list), notice: "list was successfully created.", status: :see_other
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,6 +29,6 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name,)
   end
 end
