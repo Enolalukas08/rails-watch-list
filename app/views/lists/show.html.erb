@@ -1,28 +1,26 @@
-<h1>This is the show</h1>
+<div class="d-flex flex-column gap-2">
+  <div class="banner">
+    <div class="container">
+      <h1><%= @list.name %></h1>
+    </div>
+  </div>
 
-
-<p><strong>Bookmark in this list</strong></p>
-
-<ul class="list-group">
+  <ul class="list-group">
   <% @list.bookmarks.each do |bookmark| %>
     <li><%= bookmark.comment %></li>
     <%= link_to 'Delete bookmark', bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: 'Are you sure ?' } %>
   <% end %>
 </ul>
 
-<%# Ajouter un btn link_to "add bookmarks", bookmark/new --> nouveau formulaire%>
-<div>
-<%= simple_form_for [@list, @bookmark] do |f| %>
-  <%= f.input :comment %>
-  <%= f.association :movie %>
-  <%= f.submit 'Save', class: 'btn btn-primary' %>
-<% end %>
-</div>
+  <div class="container">
+    <%= simple_form_for [@list, @bookmark] do |f| %>
+      <%= f.input :comment %>
+      <%= f.association :movie %>
+      <%= f.submit 'Save', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
 
-<%# ajouter f.association dans le formulaire  %>
-<%# je reviens a la liste once submit %>
-
-<div>
-  <%= link_to "Back to every lists", root_path %> |
-  <%# <%= button_to "Destroy this bookmark", @bookmark, method: :delete %>
+  <div class="d-flex justify-content-center align-items-center gap-2 mb-3">
+    <%= link_to "Back to every lists", root_path, class: 'btn btn-info'%>
+  </div>
 </div>
